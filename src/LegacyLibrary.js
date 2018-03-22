@@ -2,7 +2,10 @@ export default class LegacyLibrary {
   constructor(name, domElement) {
     this._name = name;
     this._domElement = domElement;
-    this._counter = 0;
+    this._prefs = {
+      alpha: 0,
+      beta: 0,
+    };
     this._onChanged = [() => { this.redraw(); }];
     this._onClick = this._onClick.bind(this);
 
@@ -18,26 +21,28 @@ export default class LegacyLibrary {
   }
 
   _onClick() {
-    this.increment();
+    this.set('alpha', this.get('alpha') + 1);
+    this.set('beta', this.get('beta') + 2);
   }
 
-  getCounter() {
-    return this._counter;
+  get(path) {
+    return this._prefs[path];
   }
 
-  increment() {
-    ++this._counter;
-    this.notify(this._counter);
+  set(path, value) {
+    this._prefs[path] = value;
+    this.notify({[path]: value});
   }
 
-  notify(value) {
+  notify(change) {
     this._onChanged.forEach((handler) => {
-      handler(value);
+      handler(change);
     });
   }
 
   redraw() {
-    this._domElement.innerHTML = `${this._name}<br/>counter = ${this._counter}`;
+    const formattedPrefs = Object.keys(this._prefs).sort().map(key => `<br/>${key} = ${this._prefs[key]}`);
+    this._domElement.innerHTML = `${this._name}${formattedPrefs.join('')}`;
   }
 
   addListener(onChanged) {

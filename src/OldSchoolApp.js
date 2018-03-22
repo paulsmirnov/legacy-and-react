@@ -12,22 +12,29 @@ div.style.backgroundColor = 'salmon';
 div.textContent = 'old-school-container-defaults';
 root.appendChild(div);
 
-const btn = document.createElement('button');
-btn.textContent = 'old-school-button-defaults';
-root.appendChild(btn);
-
 const obj = new LegacyLibrary('Old-School', div);
 
-function updateButton(value) {
-  btn.textContent = `Old-School Button @ ${value}`;
+function createButton(prefName) {
+  const btn = document.createElement('button');
+  btn.textContent = `old-school-button-defaults-${prefName}`;
+  root.appendChild(btn);
+
+  function updateButton(change) {
+    if (change[prefName] !== undefined) {
+      btn.textContent = `Old-School Button: ${prefName} = ${change[prefName]}`;
+    }
+  }
+
+  obj.addListener((change) => {
+    updateButton(change);
+  });
+
+  btn.addEventListener('click', () => {
+    obj.set(prefName, 0);
+  });
+
+  updateButton({[prefName]: obj.get(prefName)});
 }
 
-obj.addListener((value) => {
-  updateButton(value);
-});
-
-btn.addEventListener('click', () => {
-  obj.increment();
-});
-
-updateButton(obj.getCounter());
+createButton('alpha');
+createButton('beta');

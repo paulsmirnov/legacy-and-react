@@ -27,10 +27,21 @@ class ReactWayApp extends React.Component {
     this.legacy = null;
   }
 
+  getLegacyPref(prefName) {
+    return this.legacy && this.legacy.get(prefName);
+  }
+
+  setLegacyPref(prefName, value) {
+    if (this.legacy) {
+      this.legacy.set(prefName, value);
+    }
+  }
+
   render() {
     return <div>
       <LegacyComponent ref={comp => { this.domElement = comp && comp.domElement; }}/>
-      <SmartButton value={this.legacy && this.legacy.getCounter()} onClick={() => { this.legacy.increment(); }}/>
+      <SmartButton prefName='alpha' value={this.getLegacyPref('alpha')} onClick={() => { this.setLegacyPref('alpha', 0); }}/>
+      <SmartButton prefName='beta' value={this.getLegacyPref('beta')} onClick={() => { this.setLegacyPref('beta', 0); }}/>
     </div>;
   }
 }
