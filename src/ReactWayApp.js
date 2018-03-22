@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import LegacyComponent from './LegacyComponent';
 import SmartButton from './SmartButton';
-import LegacyLibrary from "./LegacyLibrary";
+import AwareLegacyLibrary from "./AwareLegacyLibrary";
 
 class ReactWayApp extends React.Component {
   constructor(props) {
@@ -16,7 +16,7 @@ class ReactWayApp extends React.Component {
   }
 
   componentDidMount() {
-    this.legacy = new LegacyLibrary('React-Way', this.domElement);
+    this.legacy = new AwareLegacyLibrary('React-Way', this.domElement);
     this.legacy.addListener(this.onChanged);
     this.onChanged();
   }

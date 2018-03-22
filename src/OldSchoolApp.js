@@ -1,4 +1,4 @@
-import LegacyLibrary from './LegacyLibrary';
+import AwareLegacyLibrary from './AwareLegacyLibrary';
 
 const root = document.getElementById('old-school-app');
 while (root.firstChild) {
@@ -12,7 +12,7 @@ div.style.backgroundColor = 'salmon';
 div.textContent = 'old-school-container-defaults';
 root.appendChild(div);
 
-const obj = new LegacyLibrary('Old-School', div);
+const obj = new AwareLegacyLibrary('Old-School', div);
 
 function createButton(prefName) {
   const btn = document.createElement('button');
