@@ -1,5 +1,5 @@
 import React from 'react';
-import AwareLegacyLibrary from "./AwareLegacyLibrary";
+import AwareLegacyLibrary from "./lib/AwareLegacyLibrary";
 
 const style = {
   width: '100px',

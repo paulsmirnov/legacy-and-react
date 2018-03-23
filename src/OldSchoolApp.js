@@ -1,4 +1,4 @@
-import AwareLegacyLibrary from './AwareLegacyLibrary';
+import AwareLegacyLibrary from './lib/AwareLegacyLibrary';
 
 const root = document.getElementById('old-school-app');
 while (root.firstChild) {
