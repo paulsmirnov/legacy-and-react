@@ -21,13 +21,13 @@ class ReactWayApp extends React.Component {
   constructor(props) {
     super(props);
 
-    this.onChanged = this.onChanged.bind(this);
+    this.onPrefsChanged = this.onPrefsChanged.bind(this);
     this.onLegacyChanged = this.onLegacyChanged.bind(this);
 
     this.legacyWrapper = new LegacyWrapper();
   }
 
-  onChanged() {
+  onPrefsChanged() {
     this.forceUpdate();
   }
 
@@ -38,7 +38,7 @@ class ReactWayApp extends React.Component {
 
   render() {
     return <div>
-      <LegacyComponent onLegacyChanged={ this.onLegacyChanged } onPrefsChanged={ this.onChanged } />
+      <LegacyComponent onLegacyChanged={ this.onLegacyChanged } onPrefsChanged={ this.onPrefsChanged } />
       <br/>
       alpha = <LegacyZeroButton legacy={ this.legacyWrapper } prefName='alpha' />&nbsp;
       beta  = <LegacyZeroButton legacy={ this.legacyWrapper } prefName='beta' />&nbsp;
