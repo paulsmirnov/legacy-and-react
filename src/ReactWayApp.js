@@ -4,6 +4,17 @@ import LegacyComponent from './LegacyComponent';
 import SmartButton from './SmartButton';
 import LegacyWrapper from "./LegacyWrapper";
 
+function withLegacy(Component) {
+  return function(props) {
+    const onChanged = (value) => {
+      props.legacy.set(props.prefName, value);
+    };
+    return <Component value={ props.legacy.get(props.prefName) } onChanged={ onChanged } />;
+  };
+}
+
+const LegacySmartButton = withLegacy(SmartButton);
+
 class ReactWayApp extends React.Component {
   constructor(props) {
     super(props);
@@ -29,8 +40,8 @@ class ReactWayApp extends React.Component {
         onLegacyChanged={ this.onLegacyChanged }
         onPrefsChanged={ this.onChanged }
       />
-      <SmartButton prefName='alpha' value={this.legacyWrapper.get('alpha')} onClick={() => { this.legacyWrapper.set('alpha', 0); }}/>
-      <SmartButton prefName='beta' value={this.legacyWrapper.get('beta')} onClick={() => { this.legacyWrapper.set('beta', 0); }}/>
+      <LegacySmartButton legacy={ this.legacyWrapper } prefName='alpha' />
+      <LegacySmartButton legacy={ this.legacyWrapper } prefName='beta' />
     </div>;
   }
 }
