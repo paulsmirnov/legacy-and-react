@@ -2,46 +2,35 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import LegacyComponent from './LegacyComponent';
 import SmartButton from './SmartButton';
-import AwareLegacyLibrary from "./AwareLegacyLibrary";
+import LegacyWrapper from "./LegacyWrapper";
 
 class ReactWayApp extends React.Component {
   constructor(props) {
     super(props);
 
     this.onChanged = this.onChanged.bind(this);
+    this.onLegacyChanged = this.onLegacyChanged.bind(this);
+
+    this.legacyWrapper = new LegacyWrapper();
   }
 
   onChanged() {
     this.forceUpdate();
   }
 
-  componentDidMount() {
-    this.legacy = new AwareLegacyLibrary('React-Way', this.domElement);
-    this.legacy.addListener(this.onChanged);
-    this.onChanged();
-  }
-
-  componentWillUnmount() {
-    this.legacy.removeListener(this.onChanged);
-    this.legacy.dispose();
-    this.legacy = null;
-  }
-
-  getLegacyPref(prefName) {
-    return this.legacy && this.legacy.get(prefName);
-  }
-
-  setLegacyPref(prefName, value) {
-    if (this.legacy) {
-      this.legacy.set(prefName, value);
-    }
+  onLegacyChanged(legacy) {
+    this.legacyWrapper.setLegacy(legacy);
+    this.forceUpdate();
   }
 
   render() {
     return <div>
-      <LegacyComponent ref={comp => { this.domElement = comp && comp.domElement; }}/>
-      <SmartButton prefName='alpha' value={this.getLegacyPref('alpha')} onClick={() => { this.setLegacyPref('alpha', 0); }}/>
-      <SmartButton prefName='beta' value={this.getLegacyPref('beta')} onClick={() => { this.setLegacyPref('beta', 0); }}/>
+      <LegacyComponent
+        onLegacyChanged={ this.onLegacyChanged }
+        onPrefsChanged={ this.onChanged }
+      />
+      <SmartButton prefName='alpha' value={this.legacyWrapper.get('alpha')} onClick={() => { this.legacyWrapper.set('alpha', 0); }}/>
+      <SmartButton prefName='beta' value={this.legacyWrapper.get('beta')} onClick={() => { this.legacyWrapper.set('beta', 0); }}/>
     </div>;
   }
 }
