@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import LegacyComponent from './LegacyComponent';
 import ZeroButton from './ZeroButton';
+import Input from './Input';
 import LegacyWrapper from "./LegacyWrapper";
 
 function withLegacy(Component) {
@@ -14,6 +15,7 @@ function withLegacy(Component) {
 }
 
 const LegacyZeroButton = withLegacy(ZeroButton);
+const LegacyInput = withLegacy(Input);
 
 class ReactWayApp extends React.Component {
   constructor(props) {
@@ -36,12 +38,11 @@ class ReactWayApp extends React.Component {
 
   render() {
     return <div>
-      <LegacyComponent
-        onLegacyChanged={ this.onLegacyChanged }
-        onPrefsChanged={ this.onChanged }
-      />
-      <LegacyZeroButton legacy={ this.legacyWrapper } prefName='alpha' />
-      <LegacyZeroButton legacy={ this.legacyWrapper } prefName='beta' />
+      <LegacyComponent onLegacyChanged={ this.onLegacyChanged } onPrefsChanged={ this.onChanged } />
+      <br/>
+      alpha = <LegacyZeroButton legacy={ this.legacyWrapper } prefName='alpha' />&nbsp;
+      beta  = <LegacyZeroButton legacy={ this.legacyWrapper } prefName='beta' />&nbsp;
+      alpha = <LegacyInput legacy={ this.legacyWrapper } prefName='alpha' />
     </div>;
   }
 }

@@ -8,12 +8,12 @@ export default class LegacyWrapper {
   }
 
   get(prefName) {
-    return this._legacy && this._legacy.get(prefName);
+    return this._legacy && this._legacy.get(prefName) || 0;
   }
 
   set(prefName, value) {
     if (this._legacy) {
-      this._legacy.set(prefName, value);
+      this._legacy.set(prefName, Number(value) || 0);
     }
   }
 }
