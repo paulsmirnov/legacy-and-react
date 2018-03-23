@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import LegacyComponent from './LegacyComponent';
-import SmartButton from './SmartButton';
+import ZeroButton from './ZeroButton';
 import LegacyWrapper from "./LegacyWrapper";
 
 function withLegacy(Component) {
@@ -13,7 +13,7 @@ function withLegacy(Component) {
   };
 }
 
-const LegacySmartButton = withLegacy(SmartButton);
+const LegacyZeroButton = withLegacy(ZeroButton);
 
 class ReactWayApp extends React.Component {
   constructor(props) {
@@ -40,8 +40,8 @@ class ReactWayApp extends React.Component {
         onLegacyChanged={ this.onLegacyChanged }
         onPrefsChanged={ this.onChanged }
       />
-      <LegacySmartButton legacy={ this.legacyWrapper } prefName='alpha' />
-      <LegacySmartButton legacy={ this.legacyWrapper } prefName='beta' />
+      <LegacyZeroButton legacy={ this.legacyWrapper } prefName='alpha' />
+      <LegacyZeroButton legacy={ this.legacyWrapper } prefName='beta' />
     </div>;
   }
 }
