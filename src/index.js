@@ -1,2 +1,1 @@
-import './OldSchoolApp';
 import './ReactWayApp';
