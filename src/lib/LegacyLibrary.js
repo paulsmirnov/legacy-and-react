@@ -5,6 +5,8 @@ export default class LegacyLibrary {
     this._prefs = {
       alpha: 0,
       beta: 0,
+      bool: false,
+      str: 'hello',
     };
 
     this._onClick = this._onClick.bind(this);
@@ -21,6 +23,8 @@ export default class LegacyLibrary {
   _onClick() {
     this.set('alpha', this.get('alpha') + 1);
     this.set('beta', this.get('beta') + 2);
+    this.set('bool', !this._prefs.bool);
+    this.set('str', this._prefs.str + this._prefs.str.substr(-1));
   }
 
   get(path) {
@@ -33,7 +37,8 @@ export default class LegacyLibrary {
   }
 
   redraw() {
-    const formattedPrefs = Object.keys(this._prefs).sort().map(key => `<br/>${key} = ${this._prefs[key]}`);
-    this._domElement.innerHTML = `${this._name}${formattedPrefs.join('')}`;
+    const format = key => `<br/>${key} = ${JSON.stringify(this._prefs[key])}`;
+    const formattedPrefs = Object.keys(this._prefs).sort().map(format);
+    this._domElement.innerHTML = `<b>${this._name}</b>${formattedPrefs.join('')}`;
   }
 }

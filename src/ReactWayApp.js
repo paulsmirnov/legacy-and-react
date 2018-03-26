@@ -17,9 +17,13 @@ class ReactWayApp extends React.Component {
     return <div>
       <LegacyContainer onChange={ this._onLegacyChange } />
       <br/>
-      alpha = <LegacyPrefsButton legacy={ this._legacy } prefName='alpha' />&nbsp;
-      beta  = <LegacyPrefsButton legacy={ this._legacy } prefName='beta' />&nbsp;
-      alpha = <LegacyPrefsInput  legacy={ this._legacy } prefName='alpha' />
+      alpha = <LegacyPrefsButton legacy={ this._legacy } prefName='alpha' prefType={Number} />&nbsp;
+      beta  = <LegacyPrefsButton legacy={ this._legacy } prefName='beta'  prefType={Number} />&nbsp;
+      alpha = <LegacyPrefsInput  legacy={ this._legacy } prefName='alpha' prefType={Number} />
+      <br/><br/>
+      bool =  <LegacyPrefsButton legacy={ this._legacy } prefName='bool'  prefType={Boolean}/>&nbsp;
+      str  =  <LegacyPrefsInput  legacy={ this._legacy } prefName='str'   prefType={String} />&nbsp;
+      str  =  <LegacyPrefsButton legacy={ this._legacy } prefName='str'   prefType={String} />
     </div>;
   }
 }

@@ -6,10 +6,13 @@ function withLegacyPrefs(Component) {
   return function LegacyPrefsControl(props) {
     const onChange = (value) => {
       if (props.legacy) {
-        props.legacy.set(props.prefName, Number(value) || 0);
+        value = (value !== undefined) ? props.prefType(value) : props.prefType();
+        if (!Number.isNaN(value)) {
+          props.legacy.set(props.prefName, value);
+        }
       }
     };
-    const value = props.legacy && props.legacy.get(props.prefName) || 0;
+    const value = props.legacy && props.prefType(props.legacy.get(props.prefName)) || props.prefType();
 
     return <Component value={ value } onChange={ onChange } />;
   };
