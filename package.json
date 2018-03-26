@@ -1,6 +1,6 @@
 {
   "name": "legacy-react",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Just and example on how to use react with a legacy library",
   "main": "dist/main.js",
   "author": "Paul Smirnov",
