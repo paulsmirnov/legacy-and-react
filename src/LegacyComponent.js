@@ -8,24 +8,22 @@ const style = {
 };
 
 export default class LegacyComponent extends React.Component {
+
+  onChange = (prefs) => {
+    this.props.onChange({prefs});
+  };
+
   componentDidMount() {
     this.legacy = new AwareLegacyLibrary('React-Way', this.domElement);
-    this.legacy.addListener(this.props.onPrefsChange);
-    this.props.onLegacyChange(this.legacy);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.onPrefsChange !== this.props.onPrefsChange) {
-      this.legacy.removeListener(this.props.onPrefsChange);
-      this.legacy.addListener(nextProps.onPrefsChange);
-    }
+    this.legacy.addListener(this.onChange);
+    this.props.onChange({legacy: this.legacy});
   }
 
   componentWillUnmount() {
-    this.legacy.removeListener(this.props.onPrefsChange);
+    this.legacy.removeListener(this.onChange);
     this.legacy.dispose();
     this.legacy = null;
-    this.props.onLegacyChange(this.legacy);
+    this.props.onChange({legacy: this.legacy});
   }
 
   shouldComponentUpdate() {

@@ -6,18 +6,16 @@ import { LegacyPrefsButton, LegacyPrefsInput } from './legacyPrefsControls';
 class ReactWayApp extends React.Component {
   legacy = null;
 
-  onPrefsChange = () => {
-    this.forceUpdate();
-  };
-
-  onLegacyChange = (legacy) => {
-    this.legacy = legacy;
+  onLegacyChange = (changed) => {
+    if (changed.legacy !== undefined) {
+      this.legacy = changed.legacy;
+    }
     this.forceUpdate();
   };
 
   render() {
     return <div>
-      <LegacyComponent onLegacyChange={ this.onLegacyChange } onPrefsChange={ this.onPrefsChange } />
+      <LegacyComponent onChange={ this.onLegacyChange } />
       <br/>
       alpha = <LegacyPrefsButton legacy={ this.legacy } prefName='alpha' />&nbsp;
       beta  = <LegacyPrefsButton legacy={ this.legacy } prefName='beta' />&nbsp;
