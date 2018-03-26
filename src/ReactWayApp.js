@@ -1,48 +1,48 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import LegacyComponent from './LegacyComponent';
-import ZeroButton from './ZeroButton';
+import ResetButton from './ResetButton';
 import Input from './Input';
 import LegacyWrapper from "./LegacyWrapper";
 
-function withLegacy(Component) {
-  return function(props) {
-    const onChanged = (value) => {
+function withLegacyPrefs(Component) {
+  return function LegacyPrefsControl(props) {
+    const onChange = (value) => {
       props.legacy.set(props.prefName, value);
     };
-    return <Component value={ props.legacy.get(props.prefName) } onChanged={ onChanged } />;
+    return <Component value={ props.legacy.get(props.prefName) } onChange={ onChange } />;
   };
 }
 
-const LegacyZeroButton = withLegacy(ZeroButton);
-const LegacyInput = withLegacy(Input);
+const LegacyPrefsButton = withLegacyPrefs(ResetButton);
+const LegacyPrefsInput = withLegacyPrefs(Input);
 
 class ReactWayApp extends React.Component {
   constructor(props) {
     super(props);
 
-    this.onPrefsChanged = this.onPrefsChanged.bind(this);
-    this.onLegacyChanged = this.onLegacyChanged.bind(this);
+    this.onPrefsChange = this.onPrefsChange.bind(this);
+    this.onLegacyChange = this.onLegacyChange.bind(this);
 
     this.legacyWrapper = new LegacyWrapper();
   }
 
-  onPrefsChanged() {
+  onPrefsChange() {
     this.forceUpdate();
   }
 
-  onLegacyChanged(legacy) {
+  onLegacyChange(legacy) {
     this.legacyWrapper.setLegacy(legacy);
     this.forceUpdate();
   }
 
   render() {
     return <div>
-      <LegacyComponent onLegacyChanged={ this.onLegacyChanged } onPrefsChanged={ this.onPrefsChanged } />
+      <LegacyComponent onLegacyChange={ this.onLegacyChange } onPrefsChange={ this.onPrefsChange } />
       <br/>
-      alpha = <LegacyZeroButton legacy={ this.legacyWrapper } prefName='alpha' />&nbsp;
-      beta  = <LegacyZeroButton legacy={ this.legacyWrapper } prefName='beta' />&nbsp;
-      alpha = <LegacyInput legacy={ this.legacyWrapper } prefName='alpha' />
+      alpha = <LegacyPrefsButton legacy={ this.legacyWrapper } prefName='alpha' />&nbsp;
+      beta  = <LegacyPrefsButton legacy={ this.legacyWrapper } prefName='beta' />&nbsp;
+      alpha = <LegacyPrefsInput  legacy={ this.legacyWrapper } prefName='alpha' />
     </div>;
   }
 }

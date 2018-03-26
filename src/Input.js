@@ -1,8 +1,8 @@
 import React from 'react';
 
 export default function Input(props) {
-  const onChanged = (event) => {
-    props.onChanged(event.target.value);
+  const onChange = (event) => {
+    props.onChange(event.target.value);
   };
-  return <input type='text' value={ props.value } onChange={ onChanged } />;
+  return <input type='text' value={ props.value } onChange={ onChange } />;
 };
