@@ -1,7 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import LegacyContainer from './LegacyContainer';
-import { LegacyPrefsButton, LegacyPrefsInput, LegacyPrefsCheckbox } from './legacyPrefsControls';
+import LegacyContainer from './lib/LegacyContainer';
+import {
+  LegacyPrefsButton,
+  LegacyPrefsInput,
+  LegacyPrefsCheckbox
+} from './controls/legacyPrefsControls';
 
 class ReactWayApp extends React.Component {
   _legacy = null;
