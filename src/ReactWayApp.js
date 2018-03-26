@@ -4,23 +4,16 @@ import LegacyComponent from './LegacyComponent';
 import { LegacyPrefsButton, LegacyPrefsInput } from './legacyPrefsControls';
 
 class ReactWayApp extends React.Component {
-  constructor(props) {
-    super(props);
+  legacy = null;
 
-    this.onPrefsChange = this.onPrefsChange.bind(this);
-    this.onLegacyChange = this.onLegacyChange.bind(this);
-
-    this.legacy = null;
-  }
-
-  onPrefsChange() {
+  onPrefsChange = () => {
     this.forceUpdate();
-  }
+  };
 
-  onLegacyChange(legacy) {
+  onLegacyChange = (legacy) => {
     this.legacy = legacy;
     this.forceUpdate();
-  }
+  };
 
   render() {
     return <div>
