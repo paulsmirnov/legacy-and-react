@@ -4,12 +4,12 @@ export default class AwareLegacyLibrary extends LegacyLibrary {
   // must override to keep track of observers
   constructor(...args) {
     super(...args);
-    this._onChanged = [];
+    this._onChange = [];
   }
 
   // must override to get rid of observers in order to free resources
   dispose() {
-    this._onChanged.length = 0;
+    this._onChange.length = 0;
     super.dispose();
   }
 
@@ -21,23 +21,23 @@ export default class AwareLegacyLibrary extends LegacyLibrary {
 
   // introduced to notify observers about changes
   _notify(change) {
-    this._onChanged.forEach((handler) => {
+    this._onChange.forEach((handler) => {
       handler(change);
     });
   }
 
   // introduced to keep track of observers
-  addListener(onChanged) {
-    if (!this._onChanged.includes(onChanged)) {
-      this._onChanged.push(onChanged);
+  addListener(onChange) {
+    if (!this._onChange.includes(onChange)) {
+      this._onChange.push(onChange);
     }
   }
 
   // introduced to keep track of observers
-  removeListener(onChanged) {
-    const index = this._onChanged.indexOf(onChanged);
+  removeListener(onChange) {
+    const index = this._onChange.indexOf(onChange);
     if (index !== -1) {
-      this._onChanged.splice(index, 1);
+      this._onChange.splice(index, 1);
     }
   }
 }

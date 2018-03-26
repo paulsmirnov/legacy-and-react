@@ -7,23 +7,24 @@ const style = {
   backgroundColor: 'palegreen',
 };
 
-export default class LegacyComponent extends React.Component {
+export default class LegacyContainer extends React.Component {
+  _legacy = null;
 
-  onChange = (prefs) => {
+  _onChange = (prefs) => {
     this.props.onChange({prefs});
   };
 
   componentDidMount() {
-    this.legacy = new AwareLegacyLibrary('React-Way', this.domElement);
-    this.legacy.addListener(this.onChange);
-    this.props.onChange({legacy: this.legacy});
+    this._legacy = new AwareLegacyLibrary('React-Way', this.domElement);
+    this._legacy.addListener(this._onChange);
+    this.props.onChange({legacy: this._legacy});
   }
 
   componentWillUnmount() {
-    this.legacy.removeListener(this.onChange);
-    this.legacy.dispose();
-    this.legacy = null;
-    this.props.onChange({legacy: this.legacy});
+    this._legacy.removeListener(this._onChange);
+    this._legacy.dispose();
+    this._legacy = null;
+    this.props.onChange({legacy: this._legacy});
   }
 
   shouldComponentUpdate() {
