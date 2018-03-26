@@ -1,6 +1,7 @@
 import React from 'react';
 import ResetButton from "./ResetButton";
 import Input from "./Input";
+import Checkbox from "./Checkbox";
 
 function withLegacyPrefs(Component) {
   return function LegacyPrefsControl(props) {
@@ -20,3 +21,4 @@ function withLegacyPrefs(Component) {
 
 export const LegacyPrefsButton = withLegacyPrefs(ResetButton);
 export const LegacyPrefsInput = withLegacyPrefs(Input);
+export const LegacyPrefsCheckbox = withLegacyPrefs(Checkbox);

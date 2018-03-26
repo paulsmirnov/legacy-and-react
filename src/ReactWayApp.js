@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import LegacyContainer from './LegacyContainer';
-import { LegacyPrefsButton, LegacyPrefsInput } from './legacyPrefsControls';
+import { LegacyPrefsButton, LegacyPrefsInput, LegacyPrefsCheckbox } from './legacyPrefsControls';
 
 class ReactWayApp extends React.Component {
   _legacy = null;
@@ -22,6 +22,7 @@ class ReactWayApp extends React.Component {
       alpha = <LegacyPrefsInput  legacy={ this._legacy } prefName='alpha' prefType={Number} />
       <br/><br/>
       bool =  <LegacyPrefsButton legacy={ this._legacy } prefName='bool'  prefType={Boolean}/>&nbsp;
+      bool =  <LegacyPrefsCheckbox legacy={ this._legacy } prefName='bool' prefType={Boolean}/>&nbsp;
       str  =  <LegacyPrefsInput  legacy={ this._legacy } prefName='str'   prefType={String} />&nbsp;
       str  =  <LegacyPrefsButton legacy={ this._legacy } prefName='str'   prefType={String} />
     </div>;
